@@ -1,5 +1,4 @@
-## Downloading and converting all data files systematically from Bixi using Python
-
+## Downloading and converting data files from Bixi systematically using Python
 By: Andrew Yew
 
 **Motivation**
@@ -9,7 +8,7 @@ What this usually means is that we as data scientists have to manually click the
 
 For one or two files this is maneagable but as companies continue to publish more open data annually, it is not unusual to find websites such as the one shown below belonging to [Bixi](https://bixi.com/en/open-data), a bike-share company in the city of Montreal, accessed 2023-May-17.
 
-<img src="001.png" width=1000 height=800 />
+![001.png](attachment:001.png)
 
 In the image above, we see a file for each year, with the most recent year having a file for each month. Downloading the data manually would mean having to repeatedly click download 16 times, not including the time for renaming and consolidating the files later into a data folder.
 
@@ -74,15 +73,15 @@ As data scientists, most of the contents within response are not useful as they 
 
 To answer this, we may perform an element inspection on the specific desired part of a website using a web browser. Right click on the element containing the data ("Year 2021" below), then select "Inspect".   
 
-![bixi]("/assets/images/002.png")
+![002.png](attachment:002.png)
 
 In the element inspector that appears, the element and its corresponding code block was highlighted. In the code block, the url embedded within the element can be identified after the "a" html tag. Clicking on this url will lead to the download of a zip file containing the data. 
 
 The other data containing urls were observed to be above and below the highlighted code block. For this case, note that all the other data urls contain the string 'amazonaws' as a common pattern. This means that the data is actually stored on an Amazon S3 bucket. To facilitate the web-scraping of all urls that contain data, the string pattern 'amazonaws' will be used to identify such urls from the response object downloaded earlier. 
 
-Side note, although there is another Python package that specializes in dealing with Amazon S3 buckets, the method presented in this notebook is more generizable to other data stored outside of Amazon S3. 
+Side note: although there is another Python package that specializes in dealing with Amazon S3 buckets, the method presented in this notebook is more generizable to other data stored outside of Amazon S3. 
 
-![bixi]("/assets/images/003.png")
+![003.png](attachment:003.png)
 
 After identifying 'amazonaws' as a string pattern that uniquely identifies data download urls among the web-scraped text blob, the next step is to use the BeautifulSoup package to turn the text blob into structured HTML(soup object) for querying.
 
