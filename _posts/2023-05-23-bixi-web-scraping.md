@@ -9,7 +9,7 @@ What this usually means is that we as data scientists have to manually click the
 
 For one or two files this is maneagable but as companies continue to publish more open data annually, it is not unusual to find websites such as the one shown below belonging to [Bixi](https://bixi.com/en/open-data), a bike-share company in the city of Montreal, accessed 2023-May-17.
 
-![bixi]("/assets/images/001.png")
+![001](001.png)
 
 In the image above, we see a file for each year, with the most recent year having a file for each month. Downloading the data manually would mean having to repeatedly click download 16 times, not including the time for renaming and consolidating the files later into a data folder.
 
