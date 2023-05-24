@@ -1,7 +1,6 @@
-# Web Scraping - Downloading CSV's
+## Downloading and converting all data files systematically from Bixi using Python
 
-By: Andrew Yew <br>
-Last updated: 2023-05-17
+By: Andrew Yew
 
 **Motivation**
 
@@ -26,15 +25,16 @@ We begin as most jupyter notebooks do, with importing required packages.
 
 
 ```python
-import pandas as pd
+import pandas as pd # for general data processing
 import requests # for scraping data from websites
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # for converting scraped data into structured html
 ```
 
 Before performing any web-scraping, the first step is to identify the website(s) from which to be scraped from. For this notebook, the website where Bixi hosts its data was identified and stored in the "url" variable below.
 
 
 ```python
+# Store target website as a variable
 url = "https://www.bixi.com/en/open-data"
 ```
 
@@ -56,17 +56,17 @@ print(f"Response status code: {response.status_code}, status: {response.reason}"
     Response status code: 200, status: OK
 
 
-Then, we can use the "text" method on the response object to visually examine the contents of the response. It was expected to receive a large text blob containing all the elements of the provided website. To avoid the notebook from becoming too long, only the first 500 characters of the response were displayed below.
+Then, we can use the "text" method on the response object to visually examine the contents of the response. It was expected to receive a large text blob containing all the elements of the provided website. To avoid the notebook from becoming too long, only the first 100 characters of the response were displayed below.
 
 
 ```python
-response.text[0:500]
+response.text[0:100]
 ```
 
 
 
 
-    '<!doctype html>\n<html class="no-js" lang="en" data-scrollbar>\n\t<head>\n\t\t<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1"/>\n<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>\n\n<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-touch-icon-57x57.png">\n<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-touch-icon-60x60.png">\n<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-touch-icon-72x72.png"'
+    '<!doctype html>\n<html class="no-js" lang="en" data-scrollbar>\n\t<head>\n\t\t<meta charset="utf-8">\n<meta'
 
 
 
@@ -84,7 +84,7 @@ Side note, although there is another Python package that specializes in dealing 
 
 ![bixi](images/003.png)
 
-Now that the string pattern that allows us to identify urls containing the data within the response, the next step is to use the BeautifulSoup package to turn the large blob of response text into structured soup object for querying.
+After identifying 'amazonaws' as a string pattern that uniquely identifies data download urls among the web-scraped text blob, the next step is to use the BeautifulSoup package to turn the text blob into structured HTML(soup object) for querying.
 
 
 ```python
@@ -93,23 +93,19 @@ url_string_pattern = 'amazonaws'
 
 # Convert response text blob into structured HTML format
 soup = BeautifulSoup(response.text, 'html.parser')
+
+# Check type of converted response text
+print(f"Converted response has type: {type(soup)}")
 ```
 
-Check type of soup object.
+    Converted response has type: <class 'bs4.BeautifulSoup'>
+
+
+As the soup object is a collection of structured HTML tags, the HTML tag 'a' can be used to identify all urls within the soup object.
 
 
 ```python
-print(type(soup))
-```
-
-    <class 'bs4.BeautifulSoup'>
-
-
-As the soup object is structured HTML tags, the HTML tag 'a' can be used to identify all urls within the soup object.
-
-
-```python
-# Find all tags
+# Find all tags that are 'a' using the find_all method
 url_tags = soup.find_all('a')
 ```
 
@@ -117,37 +113,31 @@ As seen below, the HTML tag 'a' along with any urls have been extracted into a l
 
 
 ```python
+print(f"Tag object has type: {type(url_tags[0])}")
+print("")
+
 # Visually examine first 5 tags
-url_tags[0:5]
+for index, tag in enumerate(url_tags[0:5]):
+    print(f"Tag {index + 1} / {len(url_tags)}: {tag}")
 ```
 
+    Tag object has type: <class 'bs4.element.Tag'>
+    
+    Tag 1 / 99: <a class="logo" href="/en"></a>
+    Tag 2 / 99: <a class="altLang" href="https://www.bixi.com/fr/donnees-ouvertes">Français</a>
+    Tag 3 / 99: <a href="https://www.bixi.com/en/network-info">Network info</a>
+    Tag 4 / 99: <a href="https://www.bixi.com/en/contact-us">Contact us</a>
+    Tag 5 / 99: <a class="icon-facebook social" href="https://www.facebook.com/BIXImontreal/" target="_blank"></a>
 
 
-
-    [<a class="logo" href="/en"></a>,
-     <a class="altLang" href="https://www.bixi.com/fr/donnees-ouvertes">Français</a>,
-     <a href="https://www.bixi.com/en/network-info">Network info</a>,
-     <a href="https://www.bixi.com/en/contact-us">Contact us</a>,
-     <a class="icon-facebook social" href="https://www.facebook.com/BIXImontreal/" target="_blank"></a>]
-
-
-
-
-```python
-print(type(url_tags[0]))
-```
-
-    <class 'bs4.element.Tag'>
-
-
-Then, the url within each tag must be extracted. A for loop was combined with the get method for each tag object. Within the get method, 'href' was used to  was used to identify the urls within each tag.
+Then, the url within each tag must be extracted. This was done by using the 'get' method on each tag within the 'url_tags' list. Within the get method, the string 'href' was used to  was used to identify the urls within each tag.
 
 
 ```python
 # Initiate a blank list to store extracted url
 url_list = list()
 
-# Loop through each tag to extract urls
+# Loop through each tag to extract urls using get method
 for tag in url_tags:
     url_list.append(tag.get('href'))
 ```
@@ -155,21 +145,22 @@ for tag in url_tags:
 
 ```python
 # Visual examination of the urls extracted from tags
-url_list[0:5]
+print(f"Extracted urls from tags:")
+
+# Visually examine first 5 urls extracted from tags
+for index, url in enumerate(url_list[0:5]):
+    print(f"URL {index+1} / {len(url_list)} : {url}")
 ```
 
+    Extracted urls from tags:
+    URL 1 / 99 : /en
+    URL 2 / 99 : https://www.bixi.com/fr/donnees-ouvertes
+    URL 3 / 99 : https://www.bixi.com/en/network-info
+    URL 4 / 99 : https://www.bixi.com/en/contact-us
+    URL 5 / 99 : https://www.facebook.com/BIXImontreal/
 
 
-
-    ['/en',
-     'https://www.bixi.com/fr/donnees-ouvertes',
-     'https://www.bixi.com/en/network-info',
-     'https://www.bixi.com/en/contact-us',
-     'https://www.facebook.com/BIXImontreal/']
-
-
-
-Finally, the last step is to filter the list for only the urls that contain the desired data using the defined search term.
+Finally, the last step is to filter the list for only the urls that lead to data download, which in this case are urls that contain the string pattern 'amazonaws'.
 
 
 ```python
@@ -180,10 +171,8 @@ url_df = pd.DataFrame(url_list, columns = ['extracted_url'])
 
 ```python
 # Examine the extracted urls
-url_df.head()
+display(url_df.head())
 ```
-
-
 
 
 <div>
@@ -233,6 +222,7 @@ url_df.head()
 </div>
 
 
+After converting the list of urls into a DataFrame, pandas was used to remove any null values and keep only urls that contain the string pattern 'amazonaws'.
 
 
 ```python
@@ -240,31 +230,32 @@ url_df.head()
 url_df.dropna(inplace = True)
 
 # Define filter condition to keep only urls that contain the string pattern
+# Apply lower case first before performing a string match
 cond1 = url_df['extracted_url'].str.lower().str.contains(url_string_pattern)
 
 # Use the defined condition to filter the extracted url list
 url_df = url_df.loc[cond1].reset_index(drop = True).copy()
 ```
 
-Finally, from the web-scraped HTML, we have identified and gathered all 16 urls within the BIXI website that lead to data download without having to visually identify and click on each link within the BIXI website.
+To summarize, starting from the Bixi website, we have identified and gathered all 16 data download urls within the BIXI website without having to visually identify and click on each link within the website. In part 2, we will explore how to download the data contained within each of the 16 urls, unzip the data files, then combine the data into a single CSV file.
 
 
 ```python
-print(f"The number of urls extracted is {url_df.shape[0]}")
+print(f"The number of data download urls extracted is {url_df.shape[0]}, which is 100% of all data download urls visible on the Bixi website.")
 
-# Visually examining first 5
+# Visually examine first 5 data download urls
 print("Visually examine first 5 filtered urls")
-for url in url_df['extracted_url'].to_list()[0:5]:
-    print(url)
+for index, url in enumerate(url_df['extracted_url'].to_list()[0:5]):
+    print(f"URL {index+1} / {len(url_list)} : {url}")
 ```
 
-    The number of urls extracted is 16
+    The number of data download urls extracted is 16, which is 100% of all data download urls visible on the Bixi website.
     Visually examine first 5 filtered urls
-    https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2014-f040e0.zip
-    https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2015-69fdf0.zip
-    https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2016-912f00.zip
-    https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2017-d4d086.zip
-    https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2018-96034e.zip
+    URL 1 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2014-f040e0.zip
+    URL 2 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2015-69fdf0.zip
+    URL 3 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2016-912f00.zip
+    URL 4 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2017-d4d086.zip
+    URL 5 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2018-96034e.zip
 
 
 ## Part 2: Downloading the files from each link
