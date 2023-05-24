@@ -73,7 +73,7 @@ As data scientists, most of the contents within response are not useful as they 
 
 To answer this, we may perform an element inspection on the specific desired part of a website using a web browser. Right click on the element containing the data ("Year 2021" below), then select "Inspect".   
 
-![002.png](attachment:002.png)
+![002](/assets/images/002.png){:class="img-responsive"}
 
 In the element inspector that appears, the element and its corresponding code block was highlighted. In the code block, the url embedded within the element can be identified after the "a" html tag. Clicking on this url will lead to the download of a zip file containing the data. 
 
@@ -81,7 +81,7 @@ The other data containing urls were observed to be above and below the highlight
 
 Side note: although there is another Python package that specializes in dealing with Amazon S3 buckets, the method presented in this notebook is more generizable to other data stored outside of Amazon S3. 
 
-![003.png](attachment:003.png)
+![003](/assets/images/003.png){:class="img-responsive"}
 
 After identifying 'amazonaws' as a string pattern that uniquely identifies data download urls among the web-scraped text blob, the next step is to use the BeautifulSoup package to turn the text blob into structured HTML(soup object) for querying.
 
