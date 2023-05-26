@@ -1,10 +1,10 @@
-## Downloading and converting data files from Bixi systematically using Python
+## Systematically Download and Consolidate Data Files from a Website with Python
 By: Andrew Yew
 
 **Motivation**
 
 Often times when collecting data for a project, we encounter consumer facing websites that do not have full Application Programming Interfaces (APIs) that allow for data to be accessed and downloaded in a programatic way.
-What this usually means is that we as data scientists have to manually click the download buttons on a website and provide a directory for the file to be saved on a local drive.
+What this usually means is that we, as data scientists, have to manually click the download buttons on a website and provide a directory for the file to be saved on a local drive.
 
 For one or two files this is maneagable but as companies continue to publish more open data annually, it is not unusual to find websites such as the one shown below belonging to [Bixi](https://bixi.com/en/open-data), a bike-share company in the city of Montreal, accessed 2023-May-17.
 
@@ -20,7 +20,7 @@ The notebook is split into two parts:
 
 ## Part 1: Web-scrape all download links from Bixi website
 
-We begin as most jupyter notebooks do, with importing required packages.
+We begin with importing required packages. Note that for readability, the required packages will be imported as the need arises.
 
 
 ```python
@@ -29,7 +29,7 @@ import requests # for scraping data from websites
 from bs4 import BeautifulSoup # for converting scraped data into structured html
 ```
 
-Before performing any web-scraping, the first step is to identify the website(s) from which to be scraped from. For this notebook, the website where Bixi hosts its data was identified and stored in the "url" variable below.
+Before performing any web-scraping, the first step is to identify the website(s) from which to scrape from. For this notebook, the website where Bixi hosts its data was identified and stored in the "url" variable below.
 
 
 ```python
@@ -55,7 +55,7 @@ print(f"Response status code: {response.status_code}, status: {response.reason}"
     Response status code: 200, status: OK
 
 
-Then, we can use the "text" method on the response object to visually examine the contents of the response. It was expected to receive a large text blob containing all the elements of the provided website. To avoid the notebook from becoming too long, only the first 100 characters of the response were displayed below.
+Next, we can use the "text" method on the response object to visually examine the contents of the response. It was expected to receive a large text blob containing all the elements of the provided website. To avoid the notebook from becoming too long, only the first 100 characters of the response were displayed below.
 
 
 ```python
@@ -245,16 +245,360 @@ print(f"The number of data download urls extracted is {url_df.shape[0]}, which i
 # Visually examine first 5 data download urls
 print("Visually examine first 5 filtered urls")
 for index, url in enumerate(url_df['extracted_url'].to_list()[0:5]):
-    print(f"URL {index+1} / {len(url_list)} : {url}")
+    print(f"URL {index+1} / {url_df.shape[0]} : {url}")
 ```
 
     The number of data download urls extracted is 16, which is 100% of all data download urls visible on the Bixi website.
     Visually examine first 5 filtered urls
-    URL 1 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2014-f040e0.zip
-    URL 2 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2015-69fdf0.zip
-    URL 3 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2016-912f00.zip
-    URL 4 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2017-d4d086.zip
-    URL 5 / 99 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2018-96034e.zip
+    URL 1 / 16 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2014-f040e0.zip
+    URL 2 / 16 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2015-69fdf0.zip
+    URL 3 / 16 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2016-912f00.zip
+    URL 4 / 16 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2017-d4d086.zip
+    URL 5 / 16 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2018-96034e.zip
 
 
 ## Part 2: Downloading the files from each link
+
+In part two, our focus will be on using the gathered data download urls to download, unzip and combine the data into a CSV file on the local system. Further steps can be taken to send the extracted data into a Structured Query Language (SQL) database, but that is beyond the scope of this notebook.
+
+We begin with extracting the file name from each url link using regular expression (regex).
+
+
+```python
+# Using the string split method, split the url into separate chunks
+split_df = url_df['extracted_url'].str.lower().str.split('/', expand = True)
+
+# Visually examine the first 5 rows
+display(split_df.head())
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>https:</td>
+      <td></td>
+      <td>sitewebbixi.s3.amazonaws.com</td>
+      <td>uploads</td>
+      <td>docs</td>
+      <td>biximontrealrentals2014-f040e0.zip</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>https:</td>
+      <td></td>
+      <td>sitewebbixi.s3.amazonaws.com</td>
+      <td>uploads</td>
+      <td>docs</td>
+      <td>biximontrealrentals2015-69fdf0.zip</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>https:</td>
+      <td></td>
+      <td>sitewebbixi.s3.amazonaws.com</td>
+      <td>uploads</td>
+      <td>docs</td>
+      <td>biximontrealrentals2016-912f00.zip</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>https:</td>
+      <td></td>
+      <td>sitewebbixi.s3.amazonaws.com</td>
+      <td>uploads</td>
+      <td>docs</td>
+      <td>biximontrealrentals2017-d4d086.zip</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>https:</td>
+      <td></td>
+      <td>sitewebbixi.s3.amazonaws.com</td>
+      <td>uploads</td>
+      <td>docs</td>
+      <td>biximontrealrentals2018-96034e.zip</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+The file name for each url can be found in the last column of the split url. Thus, the last column of the split_df can be added to url_df as the file names for each url.
+
+
+```python
+# Accessing the last column in the split_df and adding it to url_df
+url_df['file_name'] = split_df.iloc[:,-1]
+
+# Visually examine the first 5 rows
+display(url_df.head())
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>extracted_url</th>
+      <th>file_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2014-f040e0.zip</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2015-69fdf0.zip</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2016-912f00.zip</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2017-d4d086.zip</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2018-96034e.zip</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+Now that the data download urls and the file names to save each download as have been defined, the next step is to use the [urllib](https://docs.python.org/3/library/urllib.html) and [shutil](https://docs.python.org/3/library/shutil.html) packages to perform the downloads. The urllib package is different from the earlier used requests package as the latter is focused on human readable HTTP.
+
+
+```python
+import urllib # URL handling modules
+import shutil # High level operation on files (example copying and removing)
+import time # For timing and measuring progress of download
+import numpy as np # For rounding digits
+import datetime #For measuring time
+import pytz #For defining timezone
+```
+
+For each data download url in url_df, use urllib to gather the response (the zip data file) from the url, then use shutil to save the response into the local machine.
+
+
+```python
+# Initiate blank lists to store the time taken for each url and the access date
+time_taken_list = []
+access_date_list = []
+
+# Iterating through each url in url_df using the iterrows method
+for index, row in url_df.iterrows():
+    # Start timer for each url
+    start = time.perf_counter()
+    
+    # Define url variable
+    url = row['extracted_url']
+    
+    # Define file_path with file_name to save each url
+    file_path = 'data/' + row['file_name']
+    
+    # Using a with statement to automatically close each url request after gathering data
+    # The wb parameter in open and truncates the file to 0 bytes, meaning it creates a blank file to write data to
+    with urllib.request.urlopen(url) as response, open(file_path, 'wb') as out_file:
+        
+        # Record access time
+        access_date_list.append(datetime.datetime.now(pytz.utc))
+        
+        # Use shutil to copy the response (zip data) into the empty file
+        shutil.copyfileobj(response, out_file)
+    
+    # Record end time for each url
+    end = time.perf_counter()
+    
+    # Calculate and record time taken
+    time_taken = np.round(end-start,3)
+    time_taken_list.append(time_taken)
+    
+    # Print current status
+    print(f"Finished downloading data file {index + 1} of {url_df.shape[0]}, time taken: {time_taken} seconds.", end='\r')
+```
+
+    Finished downloading data file 16 of 16, time taken: 1.725 seconds.
+
+After downloading the data onto the local system, the time taken and date accessed were added to url_df for logging purposes.
+
+
+```python
+# Add date accessed and time taken to url_df
+url_df['date_accessed'] = access_date_list
+url_df['time_taken_seconds'] = time_taken_list
+
+# Visually examine first 5 rows of url_df
+print(f"The average download time is {np.round(url_df['time_taken_seconds'].mean(),3)} seconds.")
+display(url_df.head(5))
+```
+
+    The average download time is 4.077 seconds.
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>extracted_url</th>
+      <th>file_name</th>
+      <th>date_accessed</th>
+      <th>time_taken_seconds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2014-f040e0.zip</td>
+      <td>2023-05-26 13:42:35.764567+00:00</td>
+      <td>3.099</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2015-69fdf0.zip</td>
+      <td>2023-05-26 13:42:38.769303+00:00</td>
+      <td>2.961</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2016-912f00.zip</td>
+      <td>2023-05-26 13:42:41.899304+00:00</td>
+      <td>3.296</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2017-d4d086.zip</td>
+      <td>2023-05-26 13:42:45.069033+00:00</td>
+      <td>4.206</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>https://sitewebbixi.s3.amazonaws.com/uploads/d...</td>
+      <td>biximontrealrentals2018-96034e.zip</td>
+      <td>2023-05-26 13:42:49.305501+00:00</td>
+      <td>4.000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+Finally confirm that the downloaded files are in the local system using the os module.
+
+
+```python
+import os # to examine local directory
+```
+
+
+```python
+# Access the contents of the data folder using os
+data_folder = os.listdir('data/')
+
+# Remove system files that start with '.'
+data_folder= [file for file in data_folder if file[0] != '.']
+
+# Use the sort function to sort the list in reverse order
+data_folder.sort(reverse = True)
+
+# Print the first 5 files 
+print(f"Number of data files: {len(data_folder)}")
+for index, file in enumerate(data_folder[0:5]):
+    print(f"File {index+1} / {len(data_folder)} : {file}")
+```
+
+    Number of data files: 16
+    File 1 / 16 : biximontrealrentals2020-8e67d9.zip
+    File 2 / 16 : biximontrealrentals2019-33ea73.zip
+    File 3 / 16 : biximontrealrentals2018-96034e.zip
+    File 4 / 16 : biximontrealrentals2017-d4d086.zip
+    File 5 / 16 : biximontrealrentals2016-912f00.zip
+
+
+Now that the data files are downloaded onto the local system, the next step is to unzip the data files and combine the decompressed data into a single data file. In other cases, the decompressed data would be further cleaned and processed as part of an extract, transform, and load (ETL) pipeline before being stored in a database or used for analysis, but for this notebook we will end with a single comma separated value file containing all the data.
+
+To unzip files, the `zipfile` package will be used, documentation [here](https://docs.python.org/3/library/zipfile.html).
+
+
+```python
+import zipfile
+```
+
+
+```python
+# https://stackoverflow.com/questions/3451111/unzipping-files-in-python
+for file in os.listdir('data/bixi/'):
+    path_to_zip_file = 'data/bixi/' + file
+    directory_to_extract_to = 'data/'
+    
+    with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
+        zip_ref.extractall(directory_to_extract_to)
+```
