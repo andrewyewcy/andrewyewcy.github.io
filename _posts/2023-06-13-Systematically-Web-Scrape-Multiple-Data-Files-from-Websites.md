@@ -13,7 +13,7 @@ Contents:
   - [Conclusion and Next Steps](#Conclusion-and-Next-Steps)
   - [References and Acknowledgements](#References-and-Acknowledgements)
 
-## Motivation and Introduction
+# Motivation and Introduction
 
 Often times when collecting data for a project, we encounter consumer facing websites that do not have full Application Programming Interfaces (APIs) that allow for data to be accessed and downloaded in a programatic way.
 What this usually means is that we as data scientists have to manually click the download buttons on a website and provide a directory for the file to be saved on a local drive.
@@ -30,7 +30,7 @@ The notebook is split into two parts:
 
 Note that the downloaded data are usually stored in SQL databases managed using database management systems (DBMS) such as MySQL or AWS Athena, but are stored in a CSV file for the brevity of this notebook.
 
-## Part 1: Identify and Web Scrape Data Download URLs from Bixi
+# Part 1: Identify and Web Scrape Data Download URLs from Bixi
 
 We begin as most jupyter notebooks do, with importing required packages.
 
@@ -55,7 +55,7 @@ import os # to examine local directory
 import zipfile # for unzipping files
 ```
 
-### Send GET requests
+## Send GET requests
 
 Before performing any web-scraping, the first step is to identify the website(s) from which to scrape from. For this notebook, the website where Bixi hosts its data was identified and stored in the `url` variable below.
 
@@ -151,7 +151,7 @@ response.text[0:300]
 
 
 
-### Inspect Elements
+## Inspect Elements
 
 As data scientists, most of the contents within the response object are not useful as they pertain to the design and layout of the website. How then do we identify the specific components that contain the data we are seeking to scrape?
 
@@ -169,7 +169,7 @@ The other data containing urls were observed to be above and below the highlight
 
 ![003](/assets/images/003.png){:class="img-responsive"}
 
-### Download and Filter URLs
+## Download and Filter URLs
 
 After identifying `amazonaws` as the string pattern that uniquely identifies data download URLs among the web-scraped text blob, the next step is to use the BeautifulSoup package to transform the text blob into structured HTML(soup object) for querying.
 
@@ -348,11 +348,11 @@ for index, url in enumerate(url_df['extracted_url'].to_list()[0:5]):
     URL 5 / 16 : https://sitewebbixi.s3.amazonaws.com/uploads/docs/biximontrealrentals2018-96034e.zip
 
 
-## Part 2: Download the Files from each URL, then Extract Data into Single Folder
+# Part 2: Download the Files from each URL, then Extract Data into Single Folder
 
 In part two, our focus will be on using the gathered data download URLs to download and unzip the data into a folder on the local system. Further steps can be taken to send the extracted data into a Structured Query Language (SQL) database, but that is beyond the scope of this notebook.
 
-### Download the Data
+## Download the Data
 
 We begin with extracting the file name from each url link using regular expression (regex).
 
@@ -676,7 +676,7 @@ for index, file in enumerate(data_folder[0:5]):
     File 5 / 16 : biximontrealrentals2016-912f00.zip
 
 
-### Unzip the Data
+## Unzip the Data
 
 The data is now downloaded on the local computer, but is stored across 16 compressed ZIP files. To be useful, the data must be decompressed and extracted from each ZIP file, which can be done using the built-in [`zipfile`](https://docs.python.org/3/library/zipfile.html) package.
 
@@ -953,7 +953,7 @@ url_df.head()
 
 
 
-## Conclusion and Next Steps
+# Conclusion and Next Steps
 
 In this notebook, using Python and a web browser, we have:
 1. used `request`, `BeautifulSoup`, and the `element inspector` of a browser to identify data download URLs on the Bixi website
@@ -971,7 +971,7 @@ Possible improvements:
 3. Implement packaged Python script as part of an automatic data pipeline.
 4. Standardize file names when downloading.
 
-## References and Acknowledgements
+# References and Acknowledgements
 
 - [Downloading data from URLs](https://www.codementor.io/@aviaryan/downloading-files-from-urls-in-python-77q3bs0un) by `Avi Aryan`
 - [Extract data from subfolders](https://stackoverflow.com/questions/58792626/extract-all-files-from-multiple-folders-with-python) by `Max Kaha`

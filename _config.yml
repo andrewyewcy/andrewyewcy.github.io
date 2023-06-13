@@ -91,6 +91,10 @@ footer:
     # - label: "Instagram"
     #   icon: "fab fa-fw fa-instagram"
     #   url: "https://instagram.com/"
+    
+toc: true
+toc_label: "Table of Contents"
+toc_icon: "cog"
 
 defaults:
   # _posts
@@ -112,9 +116,11 @@ defaults:
       layout: single
       author_profile: true
 
+
 category_archive:
   type: liquid
   path: /categories/
 tag_archive:
   type: liquid
   path: /tags/
+
