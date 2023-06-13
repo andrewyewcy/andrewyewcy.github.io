@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Full Stack Data Scientist
+title: Full Stack Data Science
 email: andrewyewcy@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Hi there, I'm Andrew and this is my journey through the nooks and crannies of data science.
@@ -59,7 +59,7 @@ plugins:
 author:
   name   : "Andrew Yew"
   avatar : "/assets/images/Andrew_Yew.jpg"
-  bio    : "Hi there, I'm Andrew and this is my journey through the nooks and crannies of data science."
+  bio    : "Business Analyst turned Data Scientist, I am interested in machine learning operations and unstuctured data processing, such as texts and images. Join me as I explore the nooks and crannies of data science from data engineering to model deployment on cloud services like AWS."
   links:
     # - label: "Website"
     #   icon: "fas fa-fw fa-link"
