@@ -1,18 +1,5 @@
 ![001](/assets/images/001.png){:class="img-responsive"}
 
-<!--TABLE OF CONTENTS-->
-Contents:
-  - [Motivation and Introduction](#Motivation-and-Introduction)
-  - [Part 1: Identify and Web Scrape Data Download URLs from Bixi](#Part-1:-Identify-and-Web-Scrape-Data-Download-URLs-from-Bixi)
-    - [Send GET requests](#Send-GET-requests)
-    - [Inspect Elements](#Inspect-Elements)
-    - [Download and Filter URLs](#Download-and-Filter-URLs)
-  - [Part 2: Download the Files from each URL, then Extract Data into Single Folder](#Part-2:-Download-the-Files-from-each-URL,-then-Extract-Data-into-Single-Folder)
-    - [Download the Data](#Download-the-Data)
-    - [Unzip the Data](#Unzip-the-Data)
-  - [Conclusion and Next Steps](#Conclusion-and-Next-Steps)
-  - [References and Acknowledgements](#References-and-Acknowledgements)
-
 # Motivation and Introduction
 
 Often times when collecting data for a project, we encounter consumer facing websites that do not have full Application Programming Interfaces (APIs) that allow for data to be accessed and downloaded in a programatic way.
