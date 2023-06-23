@@ -1,4 +1,5 @@
 ---
+layout: post
 title: MySQL and phpMyAdmin on Docker
 ---
 
