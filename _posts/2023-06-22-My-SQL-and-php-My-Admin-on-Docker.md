@@ -1,3 +1,7 @@
+---
+title: MySQL and phpMyAdmin on Docker
+---
+
 ![mysql_docker_myphpadmin.png](/assets/images/mysql_docker_myphpadmin.png){:class="img-responsive"}
 
 [Previously](https://andrewyewcy.com/Systematically-Web-Scrape-Multiple-Data-Files-from-Websites/), the bicycle rides data from Bixi was web-sraped and stored locally. In this article, we explore how to create a relational database using MySQL, phpMyAdmin, and Docker containers to store the data without installing MySQL, phpMyAdmin, and their dependencies locally.
