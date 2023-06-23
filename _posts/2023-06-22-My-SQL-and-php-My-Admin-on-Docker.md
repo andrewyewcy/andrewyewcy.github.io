@@ -65,7 +65,7 @@ For this example, MySQL was pulled using the version 8.0 tag on [Docker Hub](htt
 
 Note, Docker images pulled from Docker Hub become Docker containers when they are run on Docker Engine, which runs on the local machine. (Read more [here](https://www.docker.com/resources/what-container/)) What this implies practically is that Docker containers are still dependent on the CPU of the local host, meaning that some Docker images which were built to run on Intel chips may not work on the newer ARM chips like Apple's M1 and M2. However, many Docker images are being or have already been updated to run on ARM chips at the time of this article. This is usually specified on the Docker Hub page of the desired image.
 
-# Deployment of DBMS Setup using Docker Compose
+# Deployment of DBMS Setup using Docker-compose
 
 The first step is to create a docker-compose script that tells Docker what containers to setup. 
 Once defined, Docker-compose automatically handles:
