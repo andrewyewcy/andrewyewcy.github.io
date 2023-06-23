@@ -1,0 +1,6 @@
+2023-06-22
+After resetting my laptop recently, I was faced with the gruelling task of reconfiguring my laptop with all the software needed. Rather than repeating this task every time a new machine is setup, today I show how #Docker containers can be used with #Bash to set up #MySQL and #phpMyAdmin on your local machine in less than 5 minutes without the need of going through the arduos installation of all their dependencies locally. In the future, more containers can be added to the #dockercompose script, making it easy to set up and share coding environments with others.
+
+
+
+https://andrewyewcy.com/MySQL-and-phpMyAdmin-on-Docker/
