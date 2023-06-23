@@ -1,7 +1,8 @@
 ---
-layout: post
 title: MySQL and phpMyAdmin on Docker
 ---
+
+<h1>{{ post.title }}</h1>
 
 ![mysql_docker_myphpadmin.png](/assets/images/mysql_docker_myphpadmin.png){:class="img-responsive"}
 
