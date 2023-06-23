@@ -81,10 +81,10 @@ Once defined, Docker-compose automatically handles:
 
 The Docker-compose script is written as a [YAML](https://en.wikipedia.org/wiki/YAML) file, which is a human readable data serialization language. A GitHub repo for the script can be found [here](https://github.com/andrewyewcy/docker/blob/main/mysql.yaml)
 
-The script is included below with explanations for each line of code.
+The script is named `mysql.yaml` and is included below with explanations for each line of code.
 
 
-```console
+```python
 # Specify version of docker-compose for backwards compatability
 version: '3.8'
 
@@ -148,7 +148,7 @@ volumes:
 Now that the Docker-compose script is defined, the beauty of using Docker is that the entire MySQL and phpMyAdmin setup can be executed in 1 line of code as shown below:
 
 
-```console
+```python
 # Run below line in terminal, make sure you are in same directory as YAML file
 docker-compose -f mysql.yaml up
 ```
@@ -158,7 +158,7 @@ docker-compose -f mysql.yaml up
 Once the docker network and containers are up and running, type the following path into a web browser of your choice to access phpMyAdmin.
 
 
-```console
+```python
 # Note, the port 8080 was specified in the YAML file and can be changed accordingly in case of port conflict
 http://localhost:8080/
 ```
@@ -170,7 +170,7 @@ Within phpMyAdmin, the usual database operations like creating tables and defini
 Finally, when done, the entire setup can be shut down using the `down` command, which automatically shuts down and removes the Docker containers and networks. The databases and data are stored in the specified Docker volume in the YAML file, and is persistent when the Docker-compose YAML file is initiated again.
 
 
-```console
+```python
 # Run below line in terminal, make sure you are in same directory as YAML file
 docker-compose -f mysql.yaml down
 ```
@@ -195,7 +195,7 @@ Then, Docker can be verified to be running through below methods:
 2) Using terminal:
 
 
-```console
+```python
 # Input below to verify both Docker client and server(Engine) are running
 docker version
 ```
@@ -211,7 +211,7 @@ A benefit of Docker is that the large community base and companies have already 
 The images can be pulled using the Docker `pull` command:
 
 
-```console
+```python
 # If unspecified, the latest version of the image will be pulled
 # Specify version after the ':' symbol
 docker pull mysql:8.0
@@ -223,7 +223,7 @@ docker pull phpmyadmin:5.2
 To check if images are pulled, the `ls` command can be chained with the `image` command:
 
 
-```console
+```python
 # Check pulled (downloaded) images
 docker image ls
 ```
@@ -235,7 +235,7 @@ docker image ls
 A common network is needed to enable the MySQL and phpMyAdmin containers to communicate effectively with each other. To this end, the `create` command can be chained with the `network` command:
 
 
-```console
+```python
 # input the name of the network after `create`
 docker network create mysql_network
 
@@ -252,7 +252,7 @@ Along with the created network `mysql_network`, the other 3 networks are default
 To create a Docker container within the network, the attribute `--net` may be specified in the `run` command. Note that the run command automatically pulls an image from Docker Hub if no local images were found.
 
 
-```console
+```python
 # Docker run command to create a container in the network
 
 # run in detached mode, meaning that the terminal is left free to use, requires manual shut down
@@ -276,7 +276,7 @@ mysql:8.0
 Unlike images and networks, to view docker containers, the `ps` command is used:
 
 
-```console
+```python
 # to show active containers
 docker ps
 
@@ -289,7 +289,7 @@ docker ps -a
 To further verify if MySQL is running in the container, the `exec` command can be combined with `-it` to start an interactive terminal running within the container. Then, we can verify if MySQL is running by typing `mysql -V`:
 
 
-```console
+```python
 # To open a terminal inside the container
 # -it stands for interactive
 # /bin/bash opens a bash terminal
@@ -304,7 +304,7 @@ mysql -V
 A similar step can be performed for the phpMyAdmin container with the addition of two arguments, `--link` and `-p`:
 
 
-```console
+```python
 # Docker run coemmand to initialize phpmyAdmin container
 docker rund -d \      # run in detached mode
 --name myphpadmin \   # define container name to be phpmyadmin
