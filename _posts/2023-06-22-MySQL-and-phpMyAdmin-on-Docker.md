@@ -4,7 +4,7 @@ title: MySQL and phpMyAdmin on Docker
 
 ![mysql_docker_myphpadmin.png](/assets/images/mysql_docker_myphpadmin.png){:class="img-responsive"}
 
-[Previously](https://andrewyewcy.com/Systematically-Web-Scrape-Multiple-Data-Files-from-Websites/), the bicycle rides data from Bixi was web-sraped and stored locally. To store the data, we explore how to set up MySQL and phpMyAdmin using Docker containers without installing MySQL, phpMyAdmin, and their dependencies locally.
+[Previously](https://andrewyewcy.com/Systematically-Web-Scrape-Multiple-Data-Files-from-Websites/), the bicycle rides data from Bixi were web-sraped and stored locally. To store the data, we explore how to set up MySQL and phpMyAdmin using Docker containers without installing MySQL, phpMyAdmin, and their dependencies locally.
 
 # Motivation and Introduction
 
@@ -17,7 +17,7 @@ title: MySQL and phpMyAdmin on Docker
 - Without a user interface, MySQL can only be interacted with through Terminal (or PowerShell and Command Prompt depending on OS). phpMyAdmin addresses this problem by being an open-source portable web application that acts as an administration tool for MySQL. An alternative would be [MySQL Workbench](https://www.mysql.com/products/workbench/), but that requires installation on local machine and defeats the purpose of using Docker.
 
 **[Docker](https://www.docker.com/)**
-- Docker is a tool that packages software into containers independent of the local system. Docker was used to run MySQL and phpMyAdmin on the local computer without installation, and can be used to package the entire setup in the future. Read here for more details on [Docker](https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.)
+- Docker is a tool that packages software into containers independent of the local system. Docker was used to run MySQL and phpMyAdmin on the local computer without installation, and can be used to package the entire setup in the future. Read here for more details on [Docker](https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.).
 
 ## Why store the data in a database using DBMS?
 
@@ -26,7 +26,7 @@ title: MySQL and phpMyAdmin on Docker
 
 
 **Tracking**
-- With change being the only constant, no data is expected to be perfect or clean. Using a database with a database management system (DBMS) like MySQL allows for logging and tracking of updates to data.
+- With change being the only constant, no data is expected to be perfect or clean. Using a database with DBMS like MySQL allows for logging and tracking of updates to data.
 
 
 **Structure, Relationships and Normalization**
@@ -38,7 +38,7 @@ title: MySQL and phpMyAdmin on Docker
 
 ## Wait, isn't Docker for Software Development?
 
-The ability to containerize applications provided by Docker is useful in the field of data science in the following manner:
+The ability to containerize applications provided by Docker is essential in the field of data science for the following reasons:
 
 **Ease of Installation**
 - Using Docker containers avoids the need to install MySQL and all its dependencies on your local computer. Instead of spending hours installing and configuring MySQL to work with phpMyAdmin over many computers, using Docker containers allows users to get MySQL running with phpMyAdmin in less than 5 minutes consistently across many computers.
@@ -60,18 +60,19 @@ The image above represents an overview of the DBMS setup. The containers with re
 
 To run the above setup, you will need:
 - Docker [installed](https://docs.docker.com/get-docker/) on your local computer
+- Terminal to access Docker
 - a web browser, Google Chrome was used in this article
 - (optional) a code editor for writing Docker-compose script, [VSCodium](https://vscodium.com/) was used
 
 ## Notes on Image Version
 
-For this example, MySQL was pulled using the version 8.0 tag on [Docker Hub](https://hub.docker.com/_/mysql), a public repository for Docker images, which are used to build Docker containers. Similarly, phpMyAdmin was also pulled from [Docker Hub](https://hub.docker.com/_/phpmyadmin), with version 5.2 specified.
+For this example, MySQL was pulled using the version 8.0 tag on [Docker Hub](https://hub.docker.com/_/mysql), a public repository for Docker images. Docker images are used to build Docker containers. Similarly, phpMyAdmin was also pulled from [Docker Hub](https://hub.docker.com/_/phpmyadmin), with version 5.2 specified.
 
-Note, Docker images pulled from Docker Hub become Docker containers when they are run on Docker Engine, which runs on the local machine. (Read more [here](https://www.docker.com/resources/what-container/)) What this implies practically is that Docker containers are still dependent on the CPU of the local host, meaning that some Docker images which were built to run on Intel chips may not work on the newer ARM chips like Apple's M1 and M2. However, many Docker images are being or have already been updated to run on ARM chips at the time of this article. This is usually specified on the Docker Hub page of the desired image.
+Note, Docker images pulled from Docker Hub become Docker containers when they are run on Docker Engine, all of which runs on the local machine. (Read more [here](https://www.docker.com/resources/what-container/)) What this implies practically is that Docker containers are still dependent on the CPU of the local host, meaning that some Docker images which were built to run on Intel chips may not work on the newer ARM chips like Apple's M1 and M2. However, many Docker images are being or have already been updated to run on ARM chips at the time of this article. This is usually specified on the Docker Hub page of the desired image.
 
 # Deployment of DBMS Setup using Docker-compose
 
-The first step is to create a docker-compose script that tells Docker what containers to setup. 
+The first step is to create a Docker-compose script that tells Docker what containers to setup. 
 Once defined, Docker-compose automatically handles:
 - the pulling of Docker images from Docker Hub
 - the creation of a Docker network
@@ -81,7 +82,7 @@ Once defined, Docker-compose automatically handles:
 
 The Docker-compose script is written as a [YAML](https://en.wikipedia.org/wiki/YAML) file, which is a human readable data serialization language. A GitHub repo for the script can be found [here](https://github.com/andrewyewcy/docker/blob/main/mysql.yaml)
 
-The script is named `mysql.yaml` and is included below with explanations for each line of code.
+The script is named `mysql.yaml`, and is included below with explanations for each line of code.
 
 
 ```python
@@ -155,7 +156,7 @@ docker-compose -f mysql.yaml up
 
 ![Screenshot%202023-06-21%20at%2012.21.38.png](/assets/images/Screenshot%202023-06-21%20at%2012.21.38.png){:class="img-responsive"}
 
-Once the docker network and containers are up and running, type the following path into a web browser of your choice to access phpMyAdmin.
+Once the Docker network and containers are up and running, type the following path into a web browser of your choice to access phpMyAdmin.
 
 
 ```python
@@ -177,7 +178,7 @@ docker-compose -f mysql.yaml down
 
 # Conclusion and Next Steps
 
-In this article, we explored how Docker containers can be used to conveniently setup MySQL and phpMyAdmin on a local computer without the need to deal with installation and dependencies. For now, the data is stored on the local computer. But, in the future when more data is acquired, the entire Docker setup can be packaged and hosted on cloud services like AWS, enabling scalability. In future articles, the Bixi rides data is loaded into the setup database for further cleaning and use in analysis, visualizations and machine learning models.
+In this article, we explored how Docker containers can be used to conveniently setup MySQL and phpMyAdmin on a local computer without the need to deal with installation and dependencies. For now, the data is stored on the local computer. But, in the future when more data is acquired, the entire Docker setup can be packaged and hosted on cloud services like AWS, enabling scalability. In future articles, the Bixi rides data will be loaded into the setup database for further cleaning and use in analysis, visualizations and machine learning models.
 
 # Appendix
 
@@ -188,6 +189,7 @@ Here we will explore the step by step progression of building the docker-compose
 Docker can be installed using instructions [here](https://docs.docker.com/get-docker/).
 
 Then, Docker can be verified to be running through below methods:
+
 1) Visible Desktop icon of Docker:
 
 ![Screenshot%202023-06-19%20at%205.40.22%20PM.png](/assets/images/Screenshot%202023-06-19%20at%205.40.22%20PM.png){:class="img-responsive"}
