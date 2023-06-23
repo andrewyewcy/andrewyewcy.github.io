@@ -4,14 +4,25 @@ title: MySQL and phpMyAdmin on Docker
 
 ![mysql_docker_myphpadmin.png](/assets/images/mysql_docker_myphpadmin.png){:class="img-responsive"}
 
-[Previously](https://andrewyewcy.com/Systematically-Web-Scrape-Multiple-Data-Files-from-Websites/), the bicycle rides data from Bixi was web-sraped and stored locally. In this article, we explore how to create a relational database using MySQL, phpMyAdmin, and Docker containers to store the data without installing MySQL, phpMyAdmin, and their dependencies locally.
+[Previously](https://andrewyewcy.com/Systematically-Web-Scrape-Multiple-Data-Files-from-Websites/), the bicycle rides data from Bixi was web-sraped and stored locally. To store the data, we explore how to set up MySQL and phpMyAdmin using Docker containers without installing MySQL, phpMyAdmin, and their dependencies locally.
 
 # Motivation and Introduction
 
-## Why store the data in a database?
+## What are the tools and why?
+
+**[MySQL](https://www.mysql.com/)**
+- MySQL is an open-source relational database management system (DBMS).  Although not the latest, it is one of the world's most [popular](https://hub.docker.com/_/mysql) DBMS.
+
+**[phpMyAdmin](https://www.phpmyadmin.net/)**
+- Without a user interface, MySQL can only be interacted with through Terminal (or PowerShell and Command Prompt depending on OS). phpMyAdmin addresses this problem by being an open-source portable web application that acts as an administration tool for MySQL. An alternative would be [MySQL Workbench](https://www.mysql.com/products/workbench/), but that requires installation on local machine and defeats the purpose of using Docker.
+
+**[Docker](https://www.docker.com/)**
+- Docker is a tool that packages software into containers independent of the local system. Docker was used to run MySQL and phpMyAdmin on the local computer without installation, and can be used to package the entire setup in the future. Read here for more details on [Docker](https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.)
+
+## Why store the data in a database using DBMS?
 
 **Consolidation**
-- The web-scraped data is stored across multiple Comma Separated Value (CSV) files, which makes it more difficult to access all the data since the data files must be loaded individually from each CSV and combined before use.
+- The web-scraped data are stored across multiple Comma Separated Value (CSV) files, which makes it more difficult to access all the data since the data files must be loaded individually from each CSV and combined before use.
 
 
 **Tracking**
@@ -24,17 +35,6 @@ title: MySQL and phpMyAdmin on Docker
 
 **Data Authority, Sharing and Security**
 - Rather than sending the data files through email, other users can access the same consolidated data stored in a database. This reduces the risks of having multiple copies (truths) of data among users, which causes confusion and may lead to wasted time or even wrongly justified decision making. Finally, MySQL also provides a way to manage access levels to data among users.
-
-## What are the tools and why?
-
-**[MySQL](https://www.mysql.com/)**
-- MySQL is an open-source relational database management system.  Although not the latest, it is one of the world's most [popular](https://hub.docker.com/_/mysql) DBMS.
-
-**[phpMyAdmin](https://www.phpmyadmin.net/)**
-- Without a user interface, MySQL can only be interacted with through Terminal (or PowerShell and Command Prompt depending on OS). phpMyAdmin addresses this problem by being an open-source portable web application that acts as an administration tool for MySQL. An alternative would be [MySQL Workbench](https://www.mysql.com/products/workbench/), but that requires installation on local machine and defeats the purpose of using Docker.
-
-**[Docker](https://www.docker.com/)**
-- Docker is a tool that packages software into containers independent of the local system. Docker was used to run MySQL and phpMyAdmin on the local computer without installation, and can be used to package the entire setup in the future. Read here for more details on [Docker](https://www.docker.com/resources/what-container/#:~:text=A%20Docker%20container%20image%20is,tools%2C%20system%20libraries%20and%20settings.)
 
 ## Wait, isn't Docker for Software Development?
 
