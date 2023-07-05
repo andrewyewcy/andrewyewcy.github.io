@@ -2,7 +2,7 @@
 title: Data Ingestion with SQLAlchemy and Python
 ---
 
-![003.png](/assets/images/012/003.png){:class="img-responsive"}
+![012_003.png](/assets/images/012_003.png){:class="img-responsive"}
 *Figure 1. Overview of Data Ingestion Pipeline*
 
 [Previously](https://andrewyewcy.com/MySQL-and-phpMyAdmin-on-Docker/), MySQL and phpMyAdmin were set up using Docker containers to store the bicycle rides data from Bixi. In this article, we explore how to Extract, Transform, and Load(ETL) the Bixi bicycle rides data into a MySQL database using SQLAlchemy in Python. A total 41 million rides between 2014 and 2022 had date columns converted to UTC timezone before being loaded into MySQL tables in chunks for better tracking and memory management. Finally, as a test, the ingested data were accessed using SQL statements within Python for analysis and visualization.
