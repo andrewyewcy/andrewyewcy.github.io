@@ -1,11 +1,12 @@
 ---
 title: Visualization with Matplotlib to Excel and PowerPoint
 tags: [ Data Visualization, Matplotlib, Excel, PowerPoint, SQL ]
+---
+
 {% if post.tags.size > 0 %}
   Tag{% if post.tags.size > 1 %}s{% endif %}:
   {{ post.tags | sort | join: ", " }}
 {% endif %}
----
 
 ![013_001.png](/assets/images/013_001.png){:class="img-responsive"}
 
