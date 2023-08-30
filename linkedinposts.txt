@@ -4,3 +4,18 @@ After resetting my laptop recently, I was faced with the gruelling task of recon
 
 
 https://andrewyewcy.com/MySQL-and-phpMyAdmin-on-Docker/
+
+2023-07-05
+Data ingestion can be a messy process involving many tools and decisions. 
+
+
+
+Today I demonstrate how #python  can be used to consolidate the entire data ingestion process running on portable #dockercontainer s: starting from designing and creating #sql tables based on entity relationship diagrams to performing #etl on the data into the database using #batchprocessing. 
+
+
+
+Finally, a total of 41 million Bixi bicycle rides data were ingested and accessed through SQL queries in Python for simple data visualizations. Next time,  further EDA will be performed on the data to identify insights and possibly create a dashboard for operations performance tracking.
+
+
+
+https://andrewyewcy.com/Data-Ingestion-with-SQLAlchemy-+-Python/
