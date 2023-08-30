@@ -1,5 +1,6 @@
 ---
 title: Visualization with Matplotlib to Excel and PowerPoint
+tags: [ Data Visualization, Matplotlib, Excel, PowerPoint, SQL ]
 ---
 
 ![013_001.png](/assets/images/013_001.png){:class="img-responsive"}
