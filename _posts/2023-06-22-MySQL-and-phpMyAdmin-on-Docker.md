@@ -1,5 +1,6 @@
 ---
 title: MySQL and phpMyAdmin on Docker
+tags: [ SQL, phpMyAdmin, Docker, Bash ]
 ---
 
 ![mysql_docker_myphpadmin.png](/assets/images/mysql_docker_myphpadmin.png){:class="img-responsive"}

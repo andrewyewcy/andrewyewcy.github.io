@@ -1,3 +1,8 @@
+---
+title: Web Scraping with Requests and BeautifulSoup
+tags: [ Web Scraping, Python, Requests, BeautifulSoup ]
+---
+
 ![001](/assets/images/001.png){:class="img-responsive"}
 
 # Motivation and Introduction
