@@ -1,5 +1,6 @@
 ---
 title: Data Ingestion with SQLAlchemy and Python
+tags: [ Data Processing, ETL, SQL, Python, Docker ]
 ---
 
 ![012_003.png](/assets/images/012_003.png){:class="img-responsive"}
