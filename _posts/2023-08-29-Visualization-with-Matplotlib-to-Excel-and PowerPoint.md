@@ -2,7 +2,7 @@
 title: Visualization with Matplotlib to Excel and PowerPoint
 ---
 
-![013_001.png](assets/images/013_001.png){:class="img-responsive"}
+![013_001.png](/assets/images/013_001.png){:class="img-responsive"}
 
 [Previously](https://andrewyewcy.com/Data-Ingestion-with-SQLAlchemy-+-Python/), a data ingestion pipeline was set up to decompress ZIP files and ingest Bixi rides data into a MySQL database. In this article, we explore how SQL was used within Python to summarize "large" data (35 million rows) for highly customizable plotting with Matplotlib. Then, to automate reporting, the plot was exported into both PowerPoint and Excel using Python. The figures and deliverables were designed with the context of presenting the number of annual Bixi rides to management and finance.
 
@@ -751,7 +751,7 @@ fig.savefig(
 plt.show()
 ```
 
-![013_002.png](assets/images/013_002.png){:class="img-responsive"}
+![013_002.png](/assets/images/013_002.png){:class="img-responsive"}
 
 In this simple bar plot, it was observed that the number of rides per year was steadily increasing from 2014 to 2019, until Covid-19 in 2020. Furthermore, ridership recovered to pre-pandemic levels by 2021. 
 
@@ -1003,7 +1003,7 @@ fig_1.savefig(
 plt.show()
 ```
 
-![013_003.png](assets/images/013_003.png){:class="img-responsive"}
+![013_003.png](/assets/images/013_003.png){:class="img-responsive"}
 
 # Export to Microsoft PowerPoint
 
@@ -1039,7 +1039,7 @@ pic = slide.shapes.add_picture(img_path, left, top)
 prs.save(f"../22_assets/presentations/{time.strftime('%Y%m%d-%H%M')}_{title.text}.pptx")
 ```
 
-![013_004.png](assets/images/013_004.png){:class="img-responsive"}
+![013_004.png](/assets/images/013_004.png){:class="img-responsive"}
 
 # Export to Microsoft Excel
 
@@ -1095,7 +1095,7 @@ ws.add_image(img,f"A{11 + plot_df.shape[0]+3}")
 wb.save(f"../22_assets/spreadsheets/{time.strftime('%Y%m%d-%H%M')}_{title.text}.xlsx")
 ```
 
-![013_004.png](assets/images/013_005.png){:class="img-responsive"}
+![013_004.png](/assets/images/013_005.png){:class="img-responsive"}
 
 # Conclusion
 
