@@ -1,5 +1,5 @@
 ---
-title: 021 Recipe Label Text Analysis with NLP
+title: Recipe Label Text Analysis with NLP
 tags: [ Data Visualization, Natural Language Processing, AWS S3, Tokenization, CountVectorizer ]
 ---
 
