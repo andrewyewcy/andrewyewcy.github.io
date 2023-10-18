@@ -1,3 +1,12 @@
+When training models, have you ever felt the joy of receiving a numerical dataset only to realize it's geographical coordinates.🌎 Today we explore how to mimic the #HumanIntuition of recognizing a location's importance by referencing its surrounding landmarks using #machinelearning, #sql, and  #python. Cluster centres, aka locations of importance, were identified by using #KMeans clustering on Bixi bicycle rental stations. Then, each station was analyzed in terms of its proximity to each of the cluster centres using RBF-Kernel, with the proximity features used in a Random Forest #regressor to predict the number of trips for each station based on its coordinates.
+
+In the future, the automation of the data science pipeline for model retraining using #makefile will be explored.
+
+https://andrewyewcy.com/Regression-Modelling-with-Geographic-Coordinates/
+
+2023-09-18
+Feel like AI has a finger in every pie? Catchphrase aside, today we explore how text data from recipe labels were analyzed using classic #machinelearning #nlp techniques like tokenization and the humble bagofwords model. 40,000 webscraped recipes were loaded from #aws S3 buckets for data transformation and #visualization using #python. Who knew "dessert" was the most popular recipe label on Allrecipes! 🍰
+
 2023-08-30
 Aside from receiving one's paycheck, the end of the month is also a time for every analyst's favourite aspect of the job: month end reporting 🙂 . 
 Today I show how #sql and #matplotlib  can be used to generate clean yet complex static figures for reporting. 

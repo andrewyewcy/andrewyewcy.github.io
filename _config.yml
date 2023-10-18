@@ -61,37 +61,24 @@ author:
   avatar : "/assets/images/Andrew_Yew.jpg"
   bio    : "Business Analyst turned Data Scientist, I am interested in machine learning operations and unstuctured data processing, such as texts and images. Join me as I explore the nooks and crannies of data science from data engineering to model deployment on cloud services like AWS."
   links:
-    # - label: "Website"
-    #   icon: "fas fa-fw fa-link"
-    #   url: "https://"
-    # - label: "Twitter"
-    #   icon: "fab fa-fw fa-twitter-square"
-    #   url: "https://twitter.com/"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "http://linkedin.com/in/andrewyewcy"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "http://github.com/andrewyewcy"
-    # - label: "Instagram"
-    #   icon: "fab fa-fw fa-instagram"
-    #   url: "https://instagram.com/"
-
 footer:
   links:
-    # - label: "Twitter"
-    #   icon: "fab fa-fw fa-twitter-square"
-    #   url: "https://twitter.com/"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "http://linkedin.com/in/andrewyewcy"    
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "http://github.com/andrewyewcy"
-    # - label: "Instagram"
-    #   icon: "fab fa-fw fa-instagram"
-    #   url: "https://instagram.com/"\
-
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:path/
 defaults:
   # _posts
   - scope:
@@ -107,8 +94,7 @@ defaults:
       toc: true
       toc_label: "Table of Contents"
       toc_icon: "cog"
-      toc_sticky: true
-      
+      toc_sticky: true      
   # _pages
   - scope:
       path: "_pages"
@@ -116,6 +102,15 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true
+
 
 
 category_archive:
