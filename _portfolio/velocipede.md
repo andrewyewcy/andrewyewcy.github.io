@@ -7,7 +7,7 @@ header:
 tags: [ KMeans Clustering, Random Forest Regression, RBF Kernel, Data Visualization, SQL ]
 ---
 
-![velocipede_dashboard.png](../assets/images/velocipede_dashboard.png){:class="img-responsive"}
+![velocipede_dashboard.png](../assets/images/velocipede_dashboard_.png){:class="img-responsive"}
 
 Dashboard on AWS EC2 instance: [link](http://3.96.175.190:8501)
 
