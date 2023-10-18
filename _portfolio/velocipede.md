@@ -4,6 +4,7 @@ excerpt: "A regressor that predicts the number of bicycle trips starting from ea
 header:
   # image: /assets/images/velocipede_dashboard.png
   teaser: assets/images/030_regression_modelling_002.png
+tags: [ KMeans Clustering, Random Forest Regression, RBF Kernel, Data Visualization, SQL ]
 ---
 
 ![velocipede_dashboard.png](../assets/images/velocipede_dashboard.png){:class="img-responsive"}
