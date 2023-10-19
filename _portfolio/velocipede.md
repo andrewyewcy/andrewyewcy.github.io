@@ -10,5 +10,3 @@ tags: [ KMeans Clustering, Random Forest Regression, RBF Kernel, Data Visualizat
 Dashboard on AWS EC2 instance: [link](http://3.96.175.190:8501)
 
 GitHub repository: [link](https://github.com/andrewyewcy/velocipede)
-
-![velocipede_dashboard_.png](../assets/images/velocipede_dashboard_.png){:class="img-responsive"}
