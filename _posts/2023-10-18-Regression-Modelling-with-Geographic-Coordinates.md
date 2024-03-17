@@ -3,11 +3,11 @@ title: Regression Modelling with Geographic Coordinates
 tags: [ MySQL, Random Forest Regression, KMeans Clustering, RBF Kernel, Geographic Coordinate System(GCS) ]
 ---
 
-![030_regression_modelling_001.png](../assets/images/030_regression_modelling_001.png){:class="img-responsive"}
+![recipe_classifier_webapp.png](../assets/images/recipe_classifier_webapp.png){:class="img-responsive"}
 
 # Motivation and Introduction
 
-Previously, a [dashboard](http://3.96.175.190:8501) was built to visualize Bixi trips between 2014 and 2021. As a bicycle rental company, daily operations likely include the movement of bicycles between stations, whether to improve bicycle availability at popular stations or to make space at fully docked stations. In an effort to improve this process of restocking or emptying bicycle docking stations, a regression model was built and trained using the location of stations to predict how many trips start from each station on an annual basis. 
+Previously, a [dashboard](http://15.223.122.168:8502) was built to visualize Bixi trips between 2014 and 2021. As a bicycle rental company, daily operations likely include the movement of bicycles between stations, whether to improve bicycle availability at popular stations or to make space at fully docked stations. In an effort to improve this process of restocking or emptying bicycle docking stations, a regression model was built and trained using the location of stations to predict how many trips start from each station on an annual basis. 
 
 The foundation of this model was based on the assumption that the location of a bicycle station affects how busy a station will be, and thus how much effort is needed for restocking or emptying. Furthermore, an assumption was made that although the annual number of trips changes, the percentage of annual trips for each station remains constant throughout the years, thus avoiding the need to use time-series models.
 
