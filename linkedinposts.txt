@@ -1,57 +1,88 @@
-When training models, have you ever felt the joy of receiving a numerical dataset only to realize it's geographical coordinates.🌎 Today we explore how to mimic the #HumanIntuition of recognizing a location's importance by referencing its surrounding landmarks using #machinelearning, #sql, and  #python. Cluster centres, aka locations of importance, were identified by using #KMeans clustering on Bixi bicycle rental stations. Then, each station was analyzed in terms of its proximity to each of the cluster centres using RBF-Kernel, with the proximity features used in a Random Forest #regressor to predict the number of trips for each station based on its coordinates.
+When training models, have you ever felt the joy of receiving a numerical 
+dataset only to realize it's geographical coordinates.🌎 
+Today we explore how to mimic the #HumanIntuition of recognizing a location's 
+importance by referencing its surrounding landmarks using #machinelearning, 
+#sql, and  #python. Cluster centres, aka locations of importance, were 
+identified by using #KMeans clustering on Bixi bicycle rental stations. 
+Then, each station was analyzed in terms of its proximity to each of the 
+cluster centres using RBF-Kernel, with the proximity features used in a 
+Random Forest #regressor to predict the number of trips for each station 
+based on its coordinates.
 
-In the future, the automation of the data science pipeline for model retraining using #makefile will be explored.
+In the future, the automation of the data science pipeline for model 
+retraining using #makefile will be explored.
 
 https://andrewyewcy.com/Regression-Modelling-with-Geographic-Coordinates/
 
 2023-09-18
-Feel like AI has a finger in every pie? Catchphrase aside, today we explore how text data from recipe labels were analyzed using classic #machinelearning #nlp techniques like tokenization and the humble bagofwords model. 40,000 webscraped recipes were loaded from #aws S3 buckets for data transformation and #visualization using #python. Who knew "dessert" was the most popular recipe label on Allrecipes! 🍰
+Feel like AI has a finger in every pie? Catchphrase aside, 
+today we explore how text data from recipe labels were analyzed using 
+classic #machinelearning #nlp techniques like tokenization and the humble 
+bagofwords model. 40,000 webscraped recipes were loaded from #aws S3 buckets 
+for data transformation and #visualization using #python. Who knew "dessert" 
+was the most popular recipe label on Allrecipes! 🍰
 
 2023-08-30
-Aside from receiving one's paycheck, the end of the month is also a time for every analyst's favourite aspect of the job: month end reporting 🙂 . 
-Today I show how #sql and #matplotlib  can be used to generate clean yet complex static figures for reporting. 
-Then, #python packages openpyxl and python-pptx were used to automate the creation of #excel and #powerpoint files that contain the figures for distribution to stakeholders. 
+Aside from receiving one's paycheck, the end of the month is also a time for 
+every analyst's favourite aspect of the job: month end reporting 🙂 . 
+Today I show how #sql and #matplotlib  can be used to generate clean yet 
+complex static figures for reporting. 
+Then, #python packages openpyxl and python-pptx were used to automate the 
+creation of #excel and #powerpoint files that contain the figures for 
+distribution to stakeholders. 
 
-In the future, the use of PySpark and the Parquet file format will be explored to reduce query time from the large Bixi data.
+In the future, the use of PySpark and the Parquet file format will be explored 
+to reduce query time from the large Bixi data.
 
 https://andrewyewcy.com/Visualization-with-Matplotlib-to-Excel-and-PowerPoint/
 
 2023-08-11
 Honouring the nice summer weather for cycling and my journey at #brainstation, 
-I built an interactive #dashboard that summarizes 35 million Bixi bicycle rental trips from 2014 to 2021. 
-The data was ingested and transformed using #sql and #python with #plotly and #streamlit as the main visualization packages. 
-As an alternative to Tableau and PowerBI, the dashboard was developed on docker and packaged as a #docker container for production on an #aws EC2 instance where it is available as a web-app viewable on any browser.
+I built an interactive #dashboard that summarizes 35 million Bixi bicycle 
+rental trips from 2014 to 2021. 
+The data was ingested and transformed using #sql and #python with #plotly and 
+#streamlit as the main visualization packages. 
+As an alternative to Tableau and PowerBI, the dashboard was developed on docker 
+and packaged as a #docker container for production on an #aws EC2 instance where
+ it is available as a web-app viewable on any browser.
 
 Explore and play with the dashboard here: http://3.96.175.190:8501/
 
-Stay tuned as I refine the documentation and explore time series machine learning applications in future posts. 😊
+Stay tuned as I refine the documentation and explore time series machine 
+learning applications in future posts. 😊
 
 2023-07-20
-On a fun tangent with #googlecolab, I used #numpy and #sklearn on #python to train a Support Vector Machine(SVM) model that classifies a set of randomly generated non-linear data. 
-The result, or purpose of this tangent, was to generate a groovy background for my LinkedIn profile by using #matplotlib to visualize the decision boundaries of the trained SVM model 😂 . 
-The colab jupyter notebook is available for reading here: https://colab.research.google.com/drive/1x5fTpLgt0RNAB0_gsd6woAyxHjNeflRE?usp=sharing
+On a fun tangent with #googlecolab, I used #numpy and #sklearn on #python to 
+train a Support Vector Machine(SVM) model that classifies a set of randomly 
+generated non-linear data. 
+The result, or purpose of this tangent, was to generate a groovy background for 
+my LinkedIn profile by using #matplotlib to visualize the decision boundaries of
+ the trained SVM model 😂 . 
+The colab jupyter notebook is available for reading here: 
+https://colab.research.google.com/drive/1x5fTpLgt0RNAB0_gsd6woAyxHjNeflRE?usp=sharing
 
 2023-07-05
 Data ingestion can be a messy process involving many tools and decisions. 
+Today I demonstrate how #python  can be used to consolidate the entire data 
+ingestion process running on portable #dockercontainer s: starting from 
+designing and creating #sql tables based on entity relationship diagrams to 
+performing #etl on the data into the database using #batchprocessing. 
 
-
-
-Today I demonstrate how #python  can be used to consolidate the entire data ingestion process running on portable #dockercontainer s: starting from designing and creating #sql tables based on entity relationship diagrams to performing #etl on the data into the database using #batchprocessing. 
-
-
-
-Finally, a total of 41 million Bixi bicycle rides data were ingested and accessed through SQL queries in Python for simple data visualizations. Next time,  further EDA will be performed on the data to identify insights and possibly create a dashboard for operations performance tracking.
-
-
+Finally, a total of 41 million Bixi bicycle rides data were ingested and 
+accessed through SQL queries in Python for simple data visualizations. 
+Next time,  further EDA will be performed on the data to identify insights 
+and possibly create a dashboard for operations performance tracking.
 
 https://andrewyewcy.com/Data-Ingestion-with-SQLAlchemy-+-Python/
 
 2023-06-22
-After resetting my laptop recently, I was faced with the gruelling task of reconfiguring my laptop with all the software needed. Rather than repeating this task every time a new machine is setup, today I show how #Docker containers can be used with #Bash to set up #MySQL and #phpMyAdmin on your local machine in less than 5 minutes without the need of going through the arduos installation of all their dependencies locally. In the future, more containers can be added to the #dockercompose script, making it easy to set up and share coding environments with others.
-
-
+After resetting my laptop recently, I was faced with the gruelling task of 
+reconfiguring my laptop with all the software needed. Rather than repeating 
+this task every time a new machine is setup, today I show how #Docker containers
+ can be used with #Bash to set up #MySQL and #phpMyAdmin on your local machine 
+ in less than 5 minutes without the need of going through the arduos 
+ installation of all their dependencies locally. In the future, more containers 
+ can be added to the #dockercompose script, making it easy to set up and share 
+ coding environments with others.
 
 https://andrewyewcy.com/MySQL-and-phpMyAdmin-on-Docker/
-
-
-

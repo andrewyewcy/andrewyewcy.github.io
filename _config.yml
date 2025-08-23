@@ -13,11 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Full Stack Data Science
+title: Andrew Yew, Data Scientist
 email: andrewyewcy@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Hi there, I'm Andrew and this is my journey through the nooks and crannies of data science.
-#twitter_username: username
+  Portfolio of Andrew Yew, a data scientist.
+# twitter_username: username
 linkedin_username: andrewyewcy
 github_username: andrewyewcy
 minimal_mistakes_skin: mint
@@ -76,7 +76,7 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "http://github.com/andrewyewcy"
 collections:
-  portfolio:
+  personal projects:
     output: true
     permalink: /:collection/:path/
 defaults:
@@ -105,7 +105,7 @@ defaults:
   # _portfolio
   - scope:
       path: ""
-      type: portfolio
+      type: personal projects
     values:
       layout: single
       author_profile: true

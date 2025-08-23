@@ -1,5 +1,6 @@
-# Personal Website hosted on GitHub Pages
+# Portfolio
 Author: Andrew Yew
 
-This website is based on the [Minimal Mistakes starter](https://github.com/mmistakes/mm-github-pages-starter).
-Main contents will be related to machine learning.
+This repo contains posts and assets populating the portfolio website,
+which, is hosted on Github pages.
+This website is built using [Minimal Mistakes starter](https://github.com/mmistakes/mm-github-pages-starter).
