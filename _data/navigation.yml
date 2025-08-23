@@ -1,6 +1,6 @@
 main:
-  - title: "Portfolio"
-    url: /portfolio/
+  - title: "Personal projects"
+    url: /prsonal+projects/
   - title: "Posts"
     url: /posts/
   - title: "Tags"
