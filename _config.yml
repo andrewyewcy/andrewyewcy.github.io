@@ -76,7 +76,7 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "http://github.com/andrewyewcy"
 collections:
-  personal projects:
+  personal+projects:
     output: true
     permalink: /:collection/:path/
 defaults:
@@ -102,10 +102,10 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _portfolio
+  # _personal_projects
   - scope:
       path: ""
-      type: personal projects
+      type: personal+projects
     values:
       layout: single
       author_profile: true
