@@ -49,7 +49,10 @@ plugins:
 author:
   name   : "Andrew Yew"
   avatar : "/assets/images/Andrew_Yew.jpg"
-  bio    : "With experience in developing data processing and machine learning solutions  for numerical and textual data in the manufacturing and technology fields, let me help you identify and realize technical data solutions for your business."
+  bio    : >- # this means to ignore newlines until "baseurl:"
+    "With experience in developing data mining and machine learning solutions 
+    in the manufacturing and technology fields, let me help you identify and 
+    realize technical data solutions for your business."
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
@@ -85,6 +88,7 @@ defaults:
       toc_label: "Table of Contents"
       toc_icon: "cog"
       toc_sticky: true      
+      show_date: false
   # _pages
   - scope:
       path: "_pages"
