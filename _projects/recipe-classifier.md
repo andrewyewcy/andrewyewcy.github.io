@@ -10,6 +10,6 @@ tags: [ Natural Language Processing, Classification, Logistic Regression, XGBoos
 ### Brief Description
 A classifier that identifies if a food recipe posted on allrecipes.com is 'worth it' using Natural Language Processing and ensemble methods trained on 40,000 web-scraped recipes.
 
-Streamlit web-app: [link](http://15.223.122.168:8501)
+Streamlit web-app: [link](http://35.183.35.168:8502)
 
 GitHub repository: [link](https://github.com/andrewyewcy/recipe_classifier/tree/main)
