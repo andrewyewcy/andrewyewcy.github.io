@@ -50,9 +50,9 @@ author:
   name   : "Andrew Yew"
   avatar : "/assets/images/Andrew_Yew.jpg"
   bio    : >- # this means to ignore newlines until "baseurl:"
-    "With 5 years of experience in data mining, I designed and built databases 
-    with ETL pipelines on AWS cloud for a global company in the electronics 
-    industry valued at $500M USD."
+    "With 5 years of experience in data engineering and analysis, 
+    Andrew has designed and built a data warehouse with ETL pipelines on AWS cloud 
+    for a global company in the electronics industry valued at $500 million USD."
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
